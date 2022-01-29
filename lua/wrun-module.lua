@@ -3,23 +3,23 @@ local M = { }
 local U = require'utils'
 
 local edit_file = function(file)
-  if U.is_one_of(M.setup.edit_method, {'edit', 'tabedit', 'split', 'vsplit'}) then
-    vim.cmd(M.setup.edit_method .. ' ' .. file)
+  if U.is_one_of(M.config.edit_method, {'edit', 'tabedit', 'split', 'vsplit'}) then
+    vim.cmd(M.config.edit_method .. ' ' .. file)
   end
 end
 
 M.run = function()
-  local cache_file = U.get_current_wrun_file(M.setup)
+  local cache_file = U.get_current_wrun_file(M.config)
   if U.file_exists(cache_file) then
-    U.create_term(M.setup, cache_file):toggle()
+    U.create_term(M.config, cache_file):toggle()
     return
   end
   local index = cache_file:find'@'
   local token = cache_file:sub(index)
   while token ~= '' do
-    local file = M.setup.cache_dir .. '/' .. token
+    local file = M.config.cache_dir .. '/' .. token
     if U.file_exists(file) then
-      U.create_term(M.setup, file):toggle()
+      U.create_term(M.config, file):toggle()
       return
     end
     local rev = token:reverse()
@@ -27,24 +27,27 @@ M.run = function()
     rev = rev:sub(index + 1)
     token = rev:reverse()
   end
-  U.create_cache_dir(M.setup.cache_dir)
+  U.create_cache_dir(M.config.cache_dir)
   U.display('No existing wrun file, creating a new one : ' .. cache_file)
   edit_file(cache_file)
 end
 
 M.edit = function()
-  U.create_cache_dir(M.setup.cache_dir)
-  local cache_file = U.get_current_wrun_file(M.setup)
+  U.create_cache_dir(M.config.cache_dir)
+  local cache_file = U.get_current_wrun_file(M.config)
   edit_file(cache_file)
 end
 
 M.list = function()
-  local files = U.get_cache_files(M.setup)
+  local files = U.get_cache_files(M.config)
   if files == nil then U.display'No wrun file yet' return end
   print(table.concat(files,' '))
 end
 
-M.setup = {
+vim.api.nvim_command("command! WRrun lua require'wrun'.run()")
+vim.api.nvim_command("command! WRedit lua require'wrun'.edit()")
+
+M.config = {
   cache_dir = os.getenv( "HOME" ) .. '/.local/share/nvim/wrun',
   interpreter = '/usr/bin/bash',
   edit_method = 'edit', -- 'edit' | 'tabedit' | 'split'| 'vsplit'
