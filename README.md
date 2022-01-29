@@ -37,9 +37,9 @@ You can override any of these default values :
 
 ```
 require'wrun'.setup({
-  cache_dir = os.getenv( "HOME" ) .. '/.local/share/nvim/wrun',
+    cache_dir = os.getenv( "HOME" ) .. '/.local/share/nvim/wrun',
   interpreter = '/usr/bin/bash',
-  edit_method = 'edit', -- 'edit' | 'tabedit' | 'split'| 'vsplit'
+  edit_method = '8split', -- 'edit' | 'tabedit' | '8split'| '5vsplit' | ...
   term_settings = {
     exec_direction = 'float', -- 'verical' | 'horizontal' | 'float'
     size = function(term)
@@ -49,7 +49,7 @@ require'wrun'.setup({
           return vim.o.columns * 0.4
         end
       end, -- or hardcoded value
-    exec_float_opts = { -- not needed if exec_direction is not 'float'  
+    exec_float_opts = {
       width = 100,
       height = 40,
       winblend = 3,

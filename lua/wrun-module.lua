@@ -3,9 +3,7 @@ local M = { }
 local U = require'utils'
 
 local edit_file = function(file)
-  if U.is_one_of(M.config.edit_method, {'edit', 'tabedit', 'split', 'vsplit'}) then
-    vim.cmd(M.config.edit_method .. ' ' .. file)
-  end
+  vim.cmd(M.config.edit_method .. ' ' .. file)
 end
 
 M.run = function()
@@ -50,7 +48,7 @@ vim.api.nvim_command("command! WRedit lua require'wrun'.edit()")
 M.config = {
   cache_dir = os.getenv( "HOME" ) .. '/.local/share/nvim/wrun',
   interpreter = '/usr/bin/bash',
-  edit_method = 'edit', -- 'edit' | 'tabedit' | 'split'| 'vsplit'
+  edit_method = '8split', -- 'edit' | 'tabedit' | '8split'| '5vsplit' | ...
   term_settings = {
     exec_direction = 'float', -- 'verical' | 'horizontal' | 'float'
     size = function(term)
