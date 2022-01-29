@@ -69,9 +69,9 @@ require'wrun'.setup({
 Here is how we can bind the commands :
   
 ``` 
-map('n', '<leader>te', '<cmd>WRedit<CR>')
-map('n', '<leader>tr', '<cmd>WRrun<CR>')
-map('n', '<leader>tl', '<cmd>WRlist<CR>')
+vim.api.nvim_set_keymap('n', '<leader>te', '<cmd>WRedit<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>tr', '<cmd>WRrun<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>WRlist<CR>', {})
 ```
 
 ## Tips
