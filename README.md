@@ -4,7 +4,7 @@
   WRun
 </h1>
 
-[ ![](assets/wrun-small.jpg) ](wrun.png)
+[ ![](assets/wrun-small.jpg) ](assets/wrun.png)
 
 # Overview
 
