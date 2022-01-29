@@ -64,14 +64,14 @@ require'wrun'.setup({
 })
 ```
 
-## Keybinding
+## Mapping
 
-Here is how we can bind the commands :
+Here is how we can map the commands :
   
 ``` 
-vim.api.nvim_set_keymap('n', '<leader>te', '<cmd>WRedit<CR>', {})
-vim.api.nvim_set_keymap('n', '<leader>tr', '<cmd>WRrun<CR>', {})
-vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>WRlist<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>te', '<cmd>WRedit <CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>tr', '<cmd>WRrun <CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>tl', '<cmd>WRlist <CR>', {})
 ```
 
 ## Tips
