@@ -12,7 +12,7 @@
 
 If your project is in the `/home/user/dir1/dir2` path, the plugin will look for special script associated with `/home/user/dir1/dir2`, then if not found `/home/user/dir1`, and so on.
 
-To create a new script file associated with path `path`, just open neovim at the path `path`, and `:WRrun` or `:WRedit` it. Once the script is saved, just run `:WRrun` to execute it or `:WRedit` to edit it.
+To create a new script file associated with path `path`, just open neovim at the path `path`, and `:WRrun` or `:WRedit` it. Once the script is saved, just run `:WRrun` to execute it or `:WRedit` to edit it. You can also visualize the list of existing scripts with the `:WRlist` command.
 
 The script file associated with the `/home/user/dir1/dir2` project path is named `<cache_dir>/@home@user@dir1@dir2`, where `cache_dir` is by default `$HOME/.local/share/nvim/wrun`.
 
@@ -71,6 +71,7 @@ Here is how we can bind the commands :
 ``` 
 map('n', '<leader>te', '<cmd>WRedit<CR>')
 map('n', '<leader>tr', '<cmd>WRrun<CR>')
+map('n', '<leader>tl', '<cmd>WRlist<CR>')
 ```
 
 ## Tips

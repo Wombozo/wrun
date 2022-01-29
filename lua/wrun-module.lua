@@ -36,14 +36,15 @@ M.edit = function()
   edit_file(cache_file)
 end
 
+
 M.list = function()
   local files = U.get_cache_files(M.config)
   if files == nil then U.display'No wrun file yet' return end
-  print(table.concat(files,' '))
+  print('Script files in ' .. M.config.cache_dir .. '/:')
+  for _, val in pairs(files) do
+    print('-> ' .. val)
+  end
 end
-
-vim.api.nvim_command("command! WRrun lua require'wrun'.run()")
-vim.api.nvim_command("command! WRedit lua require'wrun'.edit()")
 
 M.config = {
   cache_dir = os.getenv( "HOME" ) .. '/.local/share/nvim/wrun',

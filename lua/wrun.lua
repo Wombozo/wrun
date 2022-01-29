@@ -4,6 +4,7 @@ local setup = function(user_opts)
   w.config = vim.tbl_extend('force', w.config, user_opts or {})
   vim.api.nvim_command("command! WRrun lua require'wrun'.run()")
   vim.api.nvim_command("command! WRedit lua require'wrun'.edit()")
+  vim.api.nvim_command("command! WRlist lua require'wrun'.list()")
 end
 
 return {
