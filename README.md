@@ -6,7 +6,7 @@
 
 # Overview
 
-Allows to run a script inside a project.
+<b>WRun</b> is a nvim plugin designed to run a script inside a project.
 
 If your project is in the `/home/user/dir1/dir2` path, the plugin will look for special script associated with `/home/user/dir1/dir2`, then if not found `/home/user/dir1`, and so on.
 
@@ -17,7 +17,7 @@ The script file associated with the `/home/user/dir1/dir2` project path is named
 
 # Installation
 
-This plugins requires [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim). Using [packer](https://github.com/wbthomason/packer.nvim) :
+This plugin requires [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim). Using [packer](https://github.com/wbthomason/packer.nvim) :
 
 ```
 use {'wombozo/wrun', requires = {{'akinsho/toggleterm.nvim'}}}
@@ -73,4 +73,4 @@ map('n', '<leader>tr', '<cmd>WRrun<CR>')
 
 ## Tips
 
-If your script is a bash script, add a `read` command at the end of the script file to have a visual of the output.
+If your script is a bash script, please add a `read` command at the end of the script file to have a visual of the output.
