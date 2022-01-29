@@ -4,6 +4,8 @@
   WRun
 </h1>
 
+![Alt text](https://github.com/Wombozo/wrun/tree/master/assets/wrun.png)
+
 # Overview
 
 <b>WRun</b> is a nvim plugin designed to run a script inside a project.
