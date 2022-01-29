@@ -4,7 +4,7 @@
   WRun
 </h1>
 
-![Alt text](https://github.com/Wombozo/wrun/tree/master/assets/wrun.png)
+![WRun](assets/wrun.png)
 
 # Overview
 
