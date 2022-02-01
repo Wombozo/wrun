@@ -38,12 +38,8 @@ end
 
 
 M.list = function()
-  local files = U.get_cache_files(M.config)
-  if files == nil then U.display'No wrun file yet' return end
-  print('Script files in ' .. M.config.cache_dir .. '/:')
-  for _, val in pairs(files) do
-    print('-> ' .. val)
-  end
+  vim.cmd('vimgrep /\\%1l/j ' .. M.config.cache_dir ..'/*')
+  vim.cmd('copen')
 end
 
 M.config = {
