@@ -36,6 +36,9 @@ end
 
 U.get_cache_files = function(config)
   local f = io.popen("ls " .. config.cache_dir)
+  if f == nil then
+      return { }
+  end
   local lines = f:read'*a'
   if lines == "" then return end
   local files = { }
