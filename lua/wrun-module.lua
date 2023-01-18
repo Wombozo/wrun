@@ -2,38 +2,23 @@ local M = { }
 
 local U = require'utils'
 
-local edit_file = function(file)
-  vim.cmd(M.config.edit_method .. ' ' .. file)
-end
-
 M.run = function()
-  local cache_file = U.get_current_wrun_file(M.config)
-  if U.file_exists(cache_file) then
-    U.create_term(M.config, cache_file):toggle()
-    return
-  end
-  local index = cache_file:find'@'
-  local token = cache_file:sub(index)
-  while token ~= '' do
-    local file = M.config.cache_dir .. '/' .. token
-    if U.file_exists(file) then
-      U.create_term(M.config, file):toggle()
-      return
+    local cache_file = U.lookup_cache_file(M.config)
+    if cache_file == nil then
+        U.display('No existing wrun file')
+        return
     end
-    local rev = token:reverse()
-    index = rev:find'@'
-    rev = rev:sub(index + 1)
-    token = rev:reverse()
-  end
-  U.create_cache_dir(M.config.cache_dir)
-  U.display('No existing wrun file, creating a new one : ' .. cache_file)
-  edit_file(cache_file)
+    if U.file_exists(cache_file) then
+        U.create_term(M.config, cache_file):toggle()
+        return
+    end
 end
 
 M.edit = function()
-  U.create_cache_dir(M.config.cache_dir)
-  local cache_file = U.get_current_wrun_file(M.config)
-  edit_file(cache_file)
+    U.create_cache_dir(M.config.cache_dir)
+    local cache_file = U.lookup_cache_file(M.config)
+    U.display('Editing cache file ' .. cache_file)
+    U.edit_file(M.config, cache_file)
 end
 
 

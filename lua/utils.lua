@@ -1,12 +1,36 @@
 local U = { }
 
-U.get_current_wrun_file = function(config)
+local get_current_wrun_file = function(config)
   local project_path = vim.fn.expand('%:p')
   local cache_file = config.cache_dir .. '/' .. project_path:gsub('/','@')
   cache_file = cache_file:gsub("(.*)@.*$","%1")
   return cache_file
 end
 
+U.lookup_cache_file = function(config)
+    local cache_file = get_current_wrun_file(config)
+    if U.file_exists(cache_file) then
+        U.create_term(config, cache_file):toggle()
+        return
+    end
+    local index = cache_file:find'@'
+    local token = cache_file:sub(index)
+    while token ~= '' do
+        local file = config.cache_dir .. '/' .. token
+        if U.file_exists(file) then
+            return file
+        end
+        local rev = token:reverse()
+        index = rev:find'@'
+        rev = rev:sub(index + 1)
+        token = rev:reverse()
+    end
+    return nil
+end
+
+U.edit_file = function(config, file)
+  vim.cmd(config.edit_method .. ' ' .. file)
+end
 
 U.create_term = function(config, exec)
   require'toggleterm'.setup {
