@@ -5,11 +5,13 @@ local setup = function(user_opts)
   vim.api.nvim_command("command! WRrun lua require'wrun'.run()")
   vim.api.nvim_command("command! WRedit lua require'wrun'.edit()")
   vim.api.nvim_command("command! WRlist lua require'wrun'.list()")
+  vim.api.nvim_command("command! -nargs=1 WRnew lua require'wrun'.new <q-args>")
 end
 
 return {
   setup = setup,
   run = w.run,
   edit = w.edit,
-  list = w.list
+  list = w.list,
+  new = w.new,
 }

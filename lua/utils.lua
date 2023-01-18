@@ -52,6 +52,17 @@ U.file_exists = function(file)
   return f ~= nil
 end
 
+U.dir_exists = function(dir)
+   dir = dir .. '/'
+   local ok, err, code = os.rename(dir, dir)
+   if not ok then
+      if code == 13 then
+         return true
+      end
+   end
+   return ok, err
+end
+
 U.is_one_of = function(element, array)
   for _, value in pairs(array) do
     if value == element then return true end end

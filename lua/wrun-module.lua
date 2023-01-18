@@ -17,10 +17,31 @@ end
 M.edit = function()
     U.create_cache_dir(M.config.cache_dir)
     local cache_file = U.lookup_cache_file(M.config)
-    U.display('Editing cache file ' .. cache_file)
-    U.edit_file(M.config, cache_file)
+    if cache_file ~= nil then
+        U.display('Editing cache file ' .. cache_file)
+        U.edit_file(M.config, cache_file)
+    else
+        U.display('No cache file, use :WRnew')
+    end
 end
 
+M.new = function(path)
+    if path:sub(-1, path:len()) == "/" then
+        path = path:sub(1, path:len() - 1)
+    end
+    if not(U.dir_exists(path)) then
+        U.display("Directory " .. path .. "/ doesn't exist")
+        return
+    end
+    local cache_file = M.config.cache_dir .. '/' .. path:gsub('/','@')
+    if U.file_exists(cache_file) then
+        U.display('The cache file ' .. cache_file .. " already exists")
+        return
+    else
+        U.display('Editing new cache file ' .. cache_file)
+        U.edit_file(M.config, cache_file)
+    end
+end
 
 M.list = function()
   vim.cmd('vimgrep /\\%1l/j ' .. M.config.cache_dir ..'/*')
@@ -32,7 +53,7 @@ M.config = {
   interpreter = '/usr/bin/bash',
   edit_method = '8split', -- 'edit' | 'tabedit' | '8split'| '5vsplit' | ...
   term_settings = {
-    exec_direction = 'float', -- 'verical' | 'horizontal' | 'float'
+    exec_direction = 'float', -- 'vertical' | 'horizontal' | 'float'
     size = function(term)
         if term.direction == "horizontal" then
           return 15
