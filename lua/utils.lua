@@ -10,8 +10,7 @@ end
 U.lookup_cache_file = function(config)
     local cache_file = get_current_wrun_file(config)
     if U.file_exists(cache_file) then
-        U.create_term(config, cache_file):toggle()
-        return
+        return cache_file
     end
     local index = cache_file:find'@'
     local token = cache_file:sub(index)
