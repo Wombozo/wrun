@@ -1,7 +1,7 @@
 local U = { }
 
 local get_current_wrun_file = function(config)
-  local project_path = vim.fn.expand('%:p')
+  local project_path = vim.fn.resolve(vim.fn.expand('%:p'))
   local cache_file = config.cache_dir .. '/' .. project_path:gsub('/','@')
   cache_file = cache_file:gsub("(.*)@.*$","%1")
   return cache_file
