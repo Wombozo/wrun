@@ -29,6 +29,7 @@ end
 
 U.edit_file = function(config, file)
   vim.cmd(config.edit_method .. ' ' .. file)
+  vim.cmd("setlocal bufhidden=wipe noswap nomodeline")
 end
 
 U.create_term = function(config, exec)
